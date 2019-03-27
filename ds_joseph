@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct list
+{
+    int code;
+    int number;
+    struct  list *next;
+}list,node;
+
+void game(struct list *p, int n, int m)
+{
+    int i, j;
+    for(i=1;i<n;i++)
+    {
+        p=p->next;  //让p指向L的前一个结点
+    }
+
+    while(j<=n)
+
+    {
+        for(i=1 ;i<m;i++)
+        {
+            p=p->next;
+            //p指向要删除的结点前;
+        }
+
+        list *s=p->next;
+        m=s->code;
+        printf("%d\t",s->number);
+        p->next=s->next;
+        free(s);
+       j++;
+    }
+}
+int main(void)
+{
+    int n,i,m,j=1;
+    list *s=NULL;
+
+    printf("print n");
+    scanf("%d",&n);
+    list *L=(list*)malloc(sizeof(list));
+   L->next=L;
+   list *r=L;
+   L->number=1;
+   for(i=1;i<n;i++)
+   {
+
+       list *p;
+       p=(list*)malloc(sizeof(list));
+       p->number=i+1;
+       r->next=p;
+       r=p;
+       r->next=L;
+   }
+    printf("print password");
+    list *p=L;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&p->code);
+
+       printf("%d %d\t",p->number,p->code);
+        p=p->next;
+    }
+    printf("\ninitial m");
+    scanf("%d",&m);
+    p=L;
+
+    game(p, n, m);
+}
